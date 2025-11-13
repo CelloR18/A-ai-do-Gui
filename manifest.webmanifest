@@ -1,0 +1,20 @@
+{
+  "name": "Açaí de Garrafa do Gui",
+  "short_name": "Açaí do Gui",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#3b0f5a",
+  "theme_color": "#3b0f5a",
+  "icons": [
+    {
+      "src": "logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
