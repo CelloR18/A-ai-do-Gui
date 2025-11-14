@@ -1,20 +1,263 @@
-{
-  "name": "Açaí de Garrafa do Gui",
-  "short_name": "Açaí do Gui",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#3b0f5a",
-  "theme_color": "#3b0f5a",
-  "icons": [
-    {
-      "src": "logo.jpeg",
-      "sizes": "192x192",
-      "type": "image/jpeg"
-    },
-    {
-      "src": "logo.jpeg",
-      "sizes": "512x512",
-      "type": "image/jpeg"
-    }
-  ]
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Açaí de Garrafa do Gui</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3b0f5a">
+<link rel="icon" href="logo-editado.png" type="image/jpeg">
+<link rel="apple-touch-icon" href="logo-editado.png">
+
+<style>
+  :root{
+    --purple:#3b0f5a;
+    --purple-2:#4d1a78;
+    --gold:#c89a2f;
+    --blue:#163b63;
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --muted:#6b6b6b;
+    --success:#2d8a4a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,var(--bg),#eef0f3);
+    padding:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+  }
+  .app{max-width:420px;width:100%;background:var(--card);border-radius:18px;box-shadow:0 10px 30px rgba(20,20,30,0.12);overflow:hidden;display:flex;flex-direction:column}
+  header{padding:18px;display:flex;align-items:center;gap:12px;background:linear-gradient(90deg,var(--purple),var(--blue));color:#fff}
+  .logo{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0}
+  .logo img{width:100%;height:100%;object-fit:cover}
+  .head-info{flex:1}
+  .brand{font-weight:700;font-size:16px}
+  .tag{font-size:12px;opacity:.9}
+  main{padding:18px;display:flex;flex-direction:column;gap:14px}
+  .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(15,15,20,0.04)}
+  .product-row{display:flex;gap:12px;align-items:center}
+  .product-thumb{width:84px;height:84px;border-radius:10px;background:linear-gradient(180deg,var(--purple),var(--purple-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;text-align:center;padding:5px}
+  .product-info{flex:1}
+  .product-title{font-weight:700}
+  .product-desc{font-size:13px;color:var(--muted);margin-top:4px}
+  .price{font-weight:800;color:var(--purple-2);margin-top:8px}
+  .qty-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .qty-btn{width:36px;height:36px;border:none;border-radius:10px;background:#f0f0f3;font-weight:700;font-size:18px;cursor:pointer}
+  .qty-val{min-width:48px;text-align:center;font-weight:700}
+  input,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e6e9;font-size:14px;margin-top:8px}
+  textarea{min-height:70px;resize:vertical}
+  .payment-options{display:flex;gap:8px;margin-top:8px}
+  .pay-btn{flex:1;padding:10px;border-radius:10px;border:1px solid #eee;background:#fcfcfd;cursor:pointer;text-align:center;font-weight:700}
+  .pay-btn.active{border-color:var(--gold);background:linear-gradient(180deg,#fff,#fff9f0)}
+  .summary-row{display:flex;justify-content:space-between;margin:4px 0}
+  .total{font-weight:900;font-size:18px;color:var(--purple-2)}
+  .cta{display:flex;gap:10px;padding:14px;background:#fff;border-top:1px solid #f0f0f3}
+  .btn-primary{flex:1;background:linear-gradient(90deg,var(--purple-2),var(--purple));color:#fff;border:none;padding:12px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer}
+  .btn-secondary{background:#fff;border:1px solid #e6e6e9;border-radius:12px;padding:10px;font-weight:700;cursor:pointer}
+  footer{padding:12px;text-align:center;font-size:12px;color:var(--muted);background:#fafafa}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo"><img src="logo-editado.png" alt="Logo Açaí do Gui"></div>
+    <div class="head-info">
+      <div class="brand">Açaí de Garrafa do Gui</div>
+      <div class="tag">Peça rápido. Entrega local.</div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- AÇAÍ 300ml -->
+    <section class="card">
+      <div class="product-row">
+        <div class="product-thumb">AÇAÍ<br>300ml</div>
+        <div class="product-info">
+          <div class="product-title">Açaí de Garrafa 300ml</div>
+          <div class="product-desc">Feito com polpa pura e cremosa.</div>
+          <div class="price">R$ 15,00</div>
+          <div class="qty-row">
+            <button class="qty-btn" id="dec300">−</button>
+            <div class="qty-val" id="qty300">1</div>
+            <button class="qty-btn" id="inc300">+</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AÇAÍ 500ml (NOVO ITEM) -->
+    <section class="card">
+      <div class="product-row">
+        <div class="product-thumb">AÇAÍ<br>500ml</div>
+        <div class="product-info">
+          <div class="product-title">Açaí de Garrafa 500ml</div>
+          <div class="product-desc">Feito com polpa pura e cremosa.</div>
+          <div class="price">R$ 18,00</div>
+          <div class="qty-row">
+            <button class="qty-btn" id="dec500">−</button>
+            <div class="qty-val" id="qty500">1</div>
+            <button class="qty-btn" id="inc500">+</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DADOS DO CLIENTE -->
+    <section class="card">
+      <input id="name" placeholder="Nome completo">
+      <input id="phone" placeholder="Telefone (WhatsApp)">
+      <input id="address" placeholder="Endereço (rua, nº, bairro)">
+      <input id="city" placeholder="Cidade" value="Presidente Epitácio">
+      <textarea id="obs" placeholder="Observações (opcional)"></textarea>
+      <small style="color:var(--muted)">Frete grátis para Presidente Epitácio.</small>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <section class="card">
+      <div style="font-weight:800;margin-bottom:6px">Forma de pagamento</div>
+      <div class="payment-options">
+        <button class="pay-btn active" data-pay="Pix">Pix</button>
+        <button class="pay-btn" data-pay="Cartão">Cartão</button>
+        <button class="pay-btn" data-pay="Dinheiro">Dinheiro</button>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="card">
+      <div class="summary-row"><div>Subtotal</div><div>R$ <span id="subtotal">15.00</span></div></div>
+      <div class="summary-row"><div>Frete</div><div>R$ <span id="frete">0.00</span></div></div>
+      <div class="summary-row total"><div>Total</div><div>R$ <span id="total">15.00</span></div></div>
+    </section>
+
+  </main>
+
+  <div class="cta">
+    <button class="btn-secondary" id="clear">Limpar</button>
+    <button class="btn-primary" id="send">Enviar via WhatsApp</button>
+  </div>
+
+  <footer>© Açaí de Garrafa do Gui</footer>
+</div>
+
+<script>
+const preco300 = 15;
+const preco500 = 18;
+const freteFora = 8;
+
+let qtd300 = 0;
+let qtd500 = 0;
+let pagamento = "Pix";
+
+const q = el => document.querySelector(el);
+const qs = els => document.querySelectorAll(els);
+
+function atualizar(){
+  const cidade = q("#city").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const frete = cidade.includes("presidente epitacio") ? 0 : freteFora;
+
+  const subtotal = (preco300 * qtd300) + (preco500 * qtd500);
+  const total = subtotal + (subtotal > 0 ? frete : 0);
+
+  q("#subtotal").textContent = subtotal.toFixed(2);
+  q("#frete").textContent = subtotal === 0 ? "0.00" : frete.toFixed(2);
+  q("#total").textContent = total.toFixed(2);
+
+  // atualizar quantidades
+  q("#qty300").textContent = qtd300;
+  q("#qty500").textContent = qtd500;
+
+  // atualizar cabeçalho
+  atualizarHeader(total);
 }
+
+function atualizarHeader(total){
+  const headerRight = document.querySelector("header div:last-child");
+  headerRight.innerHTML = `
+      <div style="font-weight:800;color:var(--gold)">R$ ${total.toFixed(2)}</div>
+      <div style="font-size:12px;opacity:.9">Total</div>
+  `;
+}
+
+/* 300ml */
+q("#inc300").onclick = () => { qtd300++; atualizar(); }
+q("#dec300").onclick = () => { if(qtd300 > 0) qtd300--; atualizar(); }
+
+/* 500ml */
+q("#inc500").onclick = () => { qtd500++; atualizar(); }
+q("#dec500").onclick = () => { if(qtd500 > 0) qtd500--; atualizar(); }
+
+/* Pagamento */
+qs(".pay-btn").forEach(btn=>{
+  btn.onclick=()=>{
+    qs(".pay-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    pagamento = btn.dataset.pay;
+  };
+});
+
+/* Limpar */
+q("#clear").onclick=()=>{
+  qtd300 = 0;
+  qtd500 = 0;
+  q("#name").value="";
+  q("#phone").value="";
+  q("#address").value="";
+  q("#city").value="Presidente Epitácio";
+  q("#obs").value="";
+  qs(".pay-btn")[0].click();
+  atualizar();
+};
+
+/* Enviar pedido */
+q("#send").onclick=()=>{
+  const nome=q("#name").value.trim();
+  const fone=q("#phone").value.trim();
+  const end=q("#address").value.trim();
+  const cidade=q("#city").value.trim();
+  
+  if(!nome||!fone||!end){
+    alert("Preencha nome, telefone e endereço.");
+    return;
+  }
+
+  const subtotal=q("#subtotal").textContent;
+  const frete=q("#frete").textContent;
+  const total=q("#total").textContent;
+  const obs=q("#obs").value.trim();
+
+  const msg=`🍧 *Pedido Açaí de Garrafa do Gui* 🍧
+  
+*Cliente:* ${nome}%0A
+*WhatsApp:* ${fone}%0A
+*Endereço:* ${end}%0A
+*Cidade:* ${cidade}%0A
+*300ml:* ${qtd300} unidade(s)%0A
+*500ml:* ${qtd500} unidade(s)%0A
+*Subtotal:* R$${subtotal}%0A
+*Frete:* R$${frete}%0A
+*Total:* R$${total}%0A
+*Pagamento:* ${pagamento}%0A
+${obs?`*Obs:* ${obs}`:''}`;
+
+  const phone = '5518981077042';
+  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+};
+
+/* Inicializa tudo zerado */
+atualizar();
+
+/* Service Worker */
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
